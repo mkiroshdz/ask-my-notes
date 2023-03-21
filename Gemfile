@@ -5,7 +5,7 @@ ruby '3.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0'
-gem 'mongoid', '~> 7.0.5'
+gem 'mongoid', '~> 8.0'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
