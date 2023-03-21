@@ -6,6 +6,10 @@ ruby '3.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0'
 gem 'mongoid', '~> 8.0'
+gem 'pdf-reader', '~> 2.11'
+gem "ruby-openai"
+gem 'tokenizers'
+
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
