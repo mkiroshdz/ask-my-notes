@@ -1,13 +1,12 @@
 class Embedding
   include Mongoid::Document
 
-  field :number, type: Integer
-  field :fragment, type: Integer
-  field :content, type: Array
+  field :page_id, type: Integer
+  field :book_id, type: Integer
+  field :vector, type: Array
 
-  validates :number, :fragment, :content, presence: true
+  validates :page, :book, :vector, presence: true
 
   belongs_to :book
-
-  index({ book_id: 1, number: 1, fragment: 1 })
+  belongs_to :page
 end
