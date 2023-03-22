@@ -47,7 +47,14 @@ namespace :ingest do
       results['data'].each do |r|
         idx = r['index'].to_i
         page = slice[idx]
-        Embedding.create!(vector: r['embedding'], page: page, book: book)
+        vector = r['embedding']
+
+        Embedding.create!(
+          vector: vector, 
+          magnitude: Math.sqrt(vector.reduce(0) {|acc, val| acc + val**2 }),
+          page: page, 
+          book: book
+        )
       end
     end
 
