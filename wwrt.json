@@ -2,5 +2,16 @@
     "title": "Working with Ruby threads",
     "slug": "working-with-ruby-threads",
     "author": "Jesse Storimer",
-    "url": "https://www.google.com/search?client=firefox-b-d&q=working+with+ruby+threads"
+    "url": "https://workingwithruby.com/wwrt/intro",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1374589239i/17826435.jpg",
+    "prompt_headers": [
+        "In the book 'Working With Ruby Threads', Jesse Storimer offers some insights about how threads work in Ruby",
+        "We will provide some of the ideas presented in the book so you can answer questions regarding threads. The answers should be complete sentences, keeping it at a maximum of four sentences"
+    ],
+    "prompt_hints": [
+        "What are threads?",
+        "A thread is a sequencial flow of execution in a program that can happen in parallel with other threads that share the same process memory space.",
+        "Does Ruby support threads?",
+        "Yes, the Ruby MRI provides an abstraction to manage concurrent tasks but they are subjected to a global interpreter lock"
+    ]
 }

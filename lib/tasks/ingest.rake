@@ -16,7 +16,7 @@ namespace :ingest do
     tokenizer = Tokenizers.from_pretrained('gpt2')
 
     pdf_reader.pages.each_with_index do |raw_page, page_index|
-      page_words = raw_page.text.gsub(/[^ 0-9 a-z]+/i, ' ').split(' ').select {|w| w.present? } 
+      page_words = raw_page.text.gsub(/\n+|\t+/i, '').split(' ').select {|w| w.present? } 
       page = page_words.join(' ')
 
       page.split('').each_slice(Page::PAGE_FRAGMENT_SIZE).each_with_index do |chars, slice_idx|

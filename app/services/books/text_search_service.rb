@@ -3,6 +3,7 @@ require 'openai'
 module Books
   class TextSearchService
     QUERIES_MODEL = "text-search-curie-query-001"
+
     attr_reader :book_id, :query
 
     def initialize(book_id:, query:)
@@ -32,7 +33,7 @@ module Books
     def candidates
       embeddings.each_with_object([]) do |e, selected|
         score = cosene(e)
-        selected << { score: score, page_id: e.page_id } if score > 0.2
+        selected << { score: score, page_id: e.page_id } if score > 0.45
       end
     end
 

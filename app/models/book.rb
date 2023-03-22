@@ -4,7 +4,10 @@ class Book
   field :title, type: String
   field :author, type: String
   field :url, type: String
+  field :cover, type: String
   field :slug, type: String
+  field :prompt_headers, type: Array
+  field :prompt_hints, type: Array
   
   has_many :pages
   has_many :embeddings
