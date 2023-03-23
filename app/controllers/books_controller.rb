@@ -5,30 +5,36 @@ class BooksController < ApplicationController
 
   def ask
     @book = Book.find_by!(slug: params[:book_id])
-    results = completions["choices"].map {|c| c["text"]}
-    render json: { prompt: results }
+    question = Question.where(query: query, book_id: @book.id).first || 
+      Question.create!(query: query, response: completions, book: @book)
+    render json: { prompt: question.response }
   end
 
   private
 
   def completions
-    OpenAI::Client.new.completions(
+    return ['No results found.'] unless text_search.present?
+
+    response = OpenAI::Client.new.completions(
       parameters: {
         model: "text-davinci-003", 
-        prompt: prompt, 
+        prompt: prompt(context: text_search), 
         max_tokens: 150, 
         temperature: 0.1
       }
     )
+
+    response["choices"].map {|c| c["text"]}
   end
 
-  def prompt
-    return @prompt if defined? @prompt
-
-    txt_search = Books::TextSearchService.new(book_id: @book.id, query: query).call
-    @prompt = Query::PromptGenerationService
-      .new(context: txt_search, book: @book, query: query)
+  def prompt(context:)
+    Query::PromptGenerationService
+      .new(context: context, book: @book, query: query)
       .call
+  end
+
+  def text_search
+    @text_search ||= Books::TextSearchService.new(book_id: @book.id, query: query).call
   end
 
   def query

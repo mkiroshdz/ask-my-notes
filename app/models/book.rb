@@ -11,6 +11,7 @@ class Book
   
   has_many :pages
   has_many :embeddings
+  has_many :questions
 
   validates :slug, uniqueness: true
   validates :slug, :title, presence: true
