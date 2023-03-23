@@ -3,6 +3,10 @@ require 'openai'
 class BooksController < ApplicationController
   PROMP_CONTEXT_LENGTH = 500
 
+  def show
+    @book = Book.find_by!(slug: params[:id])
+  end
+
   def ask
     @book = Book.find_by!(slug: params[:book_id])
     question = Question.where(query: query, book_id: @book.id).first || 

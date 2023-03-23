@@ -1,0 +1,11 @@
+<%
+  app_data = {
+    slug: @book.slug,
+    title: @book.title,
+    author: @book.author,
+    cover: @book.cover,
+    questions: @book.questions.limit(5).map(&:query)
+  }
+%>
+<div id='app' data-book='<%= raw app_data.to_json %>'></div>
+<%= javascript_pack_tag 'book' %>
