@@ -33,7 +33,7 @@ module Books
     def candidates
       embeddings.each_with_object([]) do |e, selected|
         score = cosene(e)
-        selected << { score: score, page_id: e.page_id } if score > 0.45
+        selected << { score: score, page_id: e.page_id } if score > 0.4
       end
     end
 
