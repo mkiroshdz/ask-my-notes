@@ -4,7 +4,7 @@
     title: @book.title,
     author: @book.author,
     cover: @book.cover,
-    questions: @book.questions.limit(5).map(&:query)
+    questions: @book.questions.limit(10).map(&:query)
   }
 %>
 <div id='app' data-book='<%= raw app_data.to_json %>'></div>

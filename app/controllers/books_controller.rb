@@ -11,7 +11,7 @@ class BooksController < ApplicationController
     @book = Book.find_by!(slug: params[:book_id])
     question = Question.where(query: query, book_id: @book.id).first || 
       Question.create!(query: query, response: completions, book: @book)
-    render json: { prompt: question.response }
+    render json: { completions: question.response }
   end
 
   private

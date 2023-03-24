@@ -1,20 +1,38 @@
-import React from 'react';
+
 import _ from 'underscore';
+import axios from 'axios';
+import React from 'react';
 import TextAnimation from 'react-animate-text';
+
 
 export default class Book extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      completion: '',
-      question: ''
-    }
+    this.state = { completion: '', question: '' }
   }
 
   setQuestion(question) {
-    this.setState(
-      Object.assign(this.state, { question: question })
-    )
+    this.setState({ ...this.state, question: question })
+  }
+
+  requestCompletion(question) {
+    if(question.length > 15) {
+      this.setState({ ...this.state, completion: '' })
+
+      axios
+        .get(`/books/${this.props.slug}/ask?query=${question}`)
+        .then((response) => {
+          this.setState({
+            ...this.state, 
+            completion: response.data.completions.join(' '), 
+            question: question 
+          })
+        });
+    }
+  }
+
+  sendRandomQuestion() {
+    this.requestCompletion(_.sample(this.props.questions));
   }
 
   render() {
@@ -33,18 +51,24 @@ export default class Book extends React.Component {
         </div>
         <p className='has-text-centered'>This is an experiment in using AI to make my book's content more accessible. Ask a question and AI'll answer it in real-time:</p>
         <div className='control'>
-          <textarea className='textarea' onChange={(e) => this.setQuestion(e.target.value) } placeholder='Enter your question here'>
+          <textarea value={this.state.question} className='textarea' onChange={(e) => this.setQuestion(e.target.value) } placeholder='Enter your question here'>
           </textarea>
         </div>
-        {this.state.question}
         <div className='mt-3'>
-          <button className="button is-black">Ask</button>
-          <button className="button is-light">I'm feeling lucky</button>
+          <button className="button is-black" onClick={ () => this.requestCompletion(this.state.question) }>Ask</button>
+          <button className="button is-light" onClick={ () => this.sendRandomQuestion() }>I'm feeling lucky</button>
         </div>
         <div className='mt-3'>
-          <TextAnimation charInterval={50} animation='type'>{this.state.completion}</TextAnimation>
+          { getTextAnimation(this.state.completion) }
         </div>
       </div>
     );
   }
+}
+
+function getTextAnimation(completion) {
+  if(completion.length > 0) {
+    return <TextAnimation charInterval={50} animation='type'>{completion}</TextAnimation>
+  }
+  return null;
 }

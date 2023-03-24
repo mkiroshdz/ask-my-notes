@@ -7,7 +7,7 @@ import App from "./components/app.jsx";
 addEventListener("load", (e) => {
   const root = document.getElementById("app");
   const data = JSON.parse(root.dataset.book);
-  // hsdfdfs
+  
   
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
