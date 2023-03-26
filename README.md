@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Summary
 
-Things you may want to cover:
+A silly app. 
 
-* Ruby version
+## Requirements 
 
-* System dependencies
+- Node 12.x
+- Ruby 3.2.1
 
-* Configuration
+## ENV variables
 
-* Database creation
+- MONGO_URI: Uri to connect to your mongodb instance.
+- OPENAI_KEY: Key to consume Open Ai api.
 
-* Database initialization
+## Ingestion
 
-* How to run the test suite
+There's a rake task that will be used locally for ingestion of content.
 
-* Services (job queues, cache servers, search engines, etc.)
+`bundle exec rake ingest:pdf [path of pdf] [pdf of json with data]`
 
-* Deployment instructions
+## Local server 
 
-* ...
+`bundle exec rails s`
