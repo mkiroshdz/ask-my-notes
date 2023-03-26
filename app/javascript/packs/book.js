@@ -8,7 +8,6 @@ addEventListener("load", (e) => {
   const root = document.getElementById("app");
   const data = JSON.parse(root.dataset.book);
   
-  
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
       <App {..._.pick(data, 'title', 'author', 'slug', 'cover', 'questions')} />

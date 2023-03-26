@@ -12,15 +12,15 @@ export default class Book extends React.Component {
   }
 
   setQuestion(question) {
-    this.setState({ ...this.state, question: question })
+    this.setState({ ...this.state, question: question });
   }
 
   requestCompletion(question) {
     if(question.length > 15) {
-      this.setState({ ...this.state, completion: '' })
-
+      this.setState({ ...this.state, completion: '' });
+      
       axios
-        .get(`/books/${this.props.slug}/ask?query=${question}`)
+        .get(`/api/v1/books/${this.props.slug}/ask?query=${question}`)
         .then((response) => {
           this.setState({
             ...this.state, 
