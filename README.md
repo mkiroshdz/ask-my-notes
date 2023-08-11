@@ -1,6 +1,7 @@
 # Ask My Notes
 
-Ask-my-notes is a silly and funny web app that allows you to make questions about the content ingested using pdf documents. This app relies on a language model from OpenAi to be able to understand the meaning of the question given the ingested information.
+Ask-my-notes is a silly and funny web app that allows you to make questions about the content of pdf documents. 
+This app relies on a language model from OpenAi to be able to understand the meaning of the question given the ingested information.
 
 ## Requirements 
 
